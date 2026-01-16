@@ -1,18 +1,16 @@
 
+https://github.com/sararmpina-prog/Dashboard-Users.git
 
-Começar aqui e por esta ordem: 
 Coisas a corrigir gestores de users:
-- mudar ID ser ciclo para acumular mais 1 na criação de user
-- css
-(Erros extra: Active toggle interfere com o show active users)
+
+1. Active toggle interfere com o show active users
 
 
+2. Criar Instância de classe User em função (? como manter os users lá depois de adicionados after refresh)
+
+3. Exercicio 19 autonomos
 
 
+4. CSS - cartoes modais
 
 
-
-Gestor de Tarefas:
-- Exercicios autónomos (5)
-- CSS
-(Erros extra: nao adicionar pesquisa vazia)
