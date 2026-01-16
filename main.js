@@ -23,7 +23,7 @@ function renderUserCard(user) {
     let containerUtilizador = document.createElement("div");
     containerUtilizador.setAttribute("class", "containerPai");
     let containerTarefas = document.createElement("div");
-    containerTarefas.textContent = "0 tarefas atribuídas";
+    containerTarefas.textContent = "No tasks assigned";
     let nomeUser = document.createElement("h2");
     nomeUser.textContent = user.nome;
     let infoUtilizador = document.createElement("p");
@@ -122,18 +122,25 @@ function getNewUserFormData() {
     let formNewUser = document.getElementById("formNewUser");
     let inputNome = document.getElementById("nomeUtilizador");
     let inputEmail = document.getElementById("emailUtilizador");
+    let array = [];
     formNewUser.addEventListener("submit", (event) => {
         event.preventDefault();
-        console.log("Olá github");
-        createNewUser(inputNome, inputEmail);
+        array = createNewUser(inputNome, inputEmail);
     });
 }
 function createNewUser(nomeDoUtilizador, emailDoUtilizador) {
     let nome = nomeDoUtilizador.value;
     let email = emailDoUtilizador.value;
-    let novoUtilizador = new Utilizador(Date.now(), nome, email);
+    let listaAtb = [];
+    listaAtb.push(nome, email);
+    let id = Date.now();
+    for (let i = 0; i <= 5; i++) {
+        id = id + 1;
+    }
+    let novoUtilizador = new Utilizador(id, nome, email);
     listaUtilizadores.push(novoUtilizador);
     renderUtilizadores(listaUtilizadores);
+    return listaAtb;
 }
 function renderAtiveUsersBadge() {
     let contadorAtivos = document.getElementById("utilizadoresAtivos");
@@ -208,11 +215,13 @@ function renderActiveUsersPercentage() {
     let totalAtivos = renderAtiveUsersBadge();
     let totalUsers = renderUserCount();
     let percentage = (totalAtivos / totalUsers) * 100;
-    usersActivePercentage.textContent = "Percentage of active users: " + String(percentage) + "%";
+    usersActivePercentage.textContent = "Percentage of active users: " + String(percentage.toFixed(2)) + "%";
 }
 function loadUsers() {
-    let biaGuerreiro = new Utilizador(1, "Beatriz Guerreiro", "bialarag@gmail.com");
-    let greicelleSilva = new Utilizador(2, "Greicelle Silva", "greicellesilva@gmail.com");
+    // let listaNewUser = 
+    // console.log(listaNewUser); 
+    let biaGuerreiro = new Utilizador(Date.now(), "Beatriz Guerreiro", "bialarag@gmail.com");
+    let greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
     listaUtilizadores.push(biaGuerreiro, greicelleSilva);
 }
 function createBtnAz() {

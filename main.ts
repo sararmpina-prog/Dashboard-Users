@@ -49,7 +49,7 @@ function renderUserCard(user: Utilizador) {
     containerUtilizador.setAttribute("class", "containerPai")
 
     let containerTarefas = document.createElement("div") as HTMLDivElement;
-    containerTarefas.textContent = "0 tarefas atribuídas";
+    containerTarefas.textContent = "No tasks assigned";
 
     let nomeUser = document.createElement("h2") as HTMLHeadingElement; 
     nomeUser.textContent = user.nome; 
@@ -174,6 +174,7 @@ function createBtnActivateToggle (user: Utilizador) {
 }
 
 function switchUserState(identificador: number) {
+ 
   let utilizadorParaDesativar  = (listaUtilizadores.filter((utilizador) => utilizador.id == identificador))[0];
 
   if (utilizadorParaDesativar.ativo) {
@@ -205,19 +206,22 @@ function renderLoggedInUsers() {
 
 
 function getNewUserFormData() {
+  
   let formNewUser = document.getElementById("formNewUser") as HTMLFormElement; 
 
   let inputNome = document.getElementById("nomeUtilizador") as HTMLInputElement;
 
   let inputEmail = document.getElementById("emailUtilizador") as HTMLInputElement;
  
+  let array: string[] = []; 
 
   formNewUser.addEventListener("submit", (event) =>{
     
     event.preventDefault();
-    console.log("Olá github"); 
-    createNewUser(inputNome, inputEmail);
+    array = createNewUser(inputNome, inputEmail);
+   
   })
+ 
 }
 
 
@@ -226,12 +230,21 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
   let nome: string = nomeDoUtilizador.value;
   let email: string = emailDoUtilizador.value;
 
+  let listaAtb: string [] = [];
+  listaAtb.push(nome, email); 
 
-  let novoUtilizador = new Utilizador(Date.now(), nome, email);
+  let id: number = Date.now(); 
+
+  for (let i = 0; i<=5; i++) {
+    id = id + 1; 
+  } 
+  let novoUtilizador = new Utilizador(id, nome, email);
 
   listaUtilizadores.push(novoUtilizador);
 
   renderUtilizadores(listaUtilizadores);
+
+  return listaAtb; 
 }
 
 
@@ -373,15 +386,19 @@ function renderActiveUsersPercentage() {
 
     let percentage: number = (totalAtivos/totalUsers)*100; 
 
-    usersActivePercentage.textContent = "Percentage of active users: " + String(percentage) + "%"; 
+    usersActivePercentage.textContent = "Percentage of active users: " + String(percentage.toFixed(2)) + "%"; 
 
 }
 
 
 function loadUsers() {
- let biaGuerreiro = new Utilizador(1, "Beatriz Guerreiro", "bialarag@gmail.com");
 
-  let greicelleSilva = new Utilizador(2, "Greicelle Silva", "greicellesilva@gmail.com");
+  // let listaNewUser = 
+  // console.log(listaNewUser); 
+
+ let biaGuerreiro = new Utilizador(Date.now(), "Beatriz Guerreiro", "bialarag@gmail.com");
+
+  let greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
 
   listaUtilizadores.push(biaGuerreiro, greicelleSilva);
 
@@ -402,5 +419,6 @@ function orderArray () {
   let userOrdered = listaUtilizadores.sort((a,b) => a.nome.localeCompare(b.nome))
 
   renderUtilizadores(userOrdered); 
-
 }
+ 
+
