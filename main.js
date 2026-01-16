@@ -124,6 +124,7 @@ function getNewUserFormData() {
     var inputEmail = document.getElementById("emailUtilizador");
     formNewUser.addEventListener("submit", function (event) {
         event.preventDefault();
+        console.log("Olá github");
         createNewUser(inputNome, inputEmail);
     });
 }

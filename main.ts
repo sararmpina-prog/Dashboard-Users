@@ -214,6 +214,7 @@ function getNewUserFormData() {
   formNewUser.addEventListener("submit", (event) =>{
     
     event.preventDefault();
+    console.log("Olá github"); 
     createNewUser(inputNome, inputEmail);
   })
 }
