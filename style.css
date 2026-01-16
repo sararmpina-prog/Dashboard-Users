@@ -145,8 +145,11 @@ li {
 
 .userTemplate {
   display: flex;
-  gap: 20px; 
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
 }
+
 
 button {
   border-radius: 5px;
