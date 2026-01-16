@@ -400,7 +400,15 @@ function loadUsers() {
 
   let greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
 
-  listaUtilizadores.push(biaGuerreiro, greicelleSilva);
+  let danielPina = new Utilizador(Date.now() + 2, "Daniel Pina", "danielteclado@gmail.com");
+
+  let tomasJose = new Utilizador(Date.now() + 3, "Tomás José", "tomecas@gmail.com");
+
+  // let calvinSilva = new Utilizador(Date.now() + 4, "Calvin Almeida", "calvinandhobbes@gmail.com");
+
+  // let lucasSilva = new Utilizador(Date.now() + 5, "Lucas Madeira", "calvinandlucas@gmail.com");
+
+  listaUtilizadores.push(biaGuerreiro, greicelleSilva, danielPina, tomasJose);
 
 }
 

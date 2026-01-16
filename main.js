@@ -1,15 +1,16 @@
-class Utilizador {
-    constructor(id, nome, email) {
+var Utilizador = /** @class */ (function () {
+    function Utilizador(id, nome, email) {
         this.ativo = true;
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
-    desativar() {
+    Utilizador.prototype.desativar = function () {
         this.ativo = false;
-    }
-}
-let listaUtilizadores = [];
+    };
+    return Utilizador;
+}());
+var listaUtilizadores = [];
 getNewUserFormData();
 loadUsers();
 renderUtilizadores(listaUtilizadores);
@@ -18,16 +19,16 @@ createBtnSearch();
 createBtnCloseModal();
 createBtnAz();
 function renderUserCard(user) {
-    let elementoLista = document.createElement("li");
+    var elementoLista = document.createElement("li");
     elementoLista.setAttribute("class", "userCard");
-    let containerUtilizador = document.createElement("div");
+    var containerUtilizador = document.createElement("div");
     containerUtilizador.setAttribute("class", "containerPai");
-    let containerTarefas = document.createElement("div");
+    var containerTarefas = document.createElement("div");
     containerTarefas.textContent = "No tasks assigned";
-    let nomeUser = document.createElement("h2");
+    var nomeUser = document.createElement("h2");
     nomeUser.textContent = user.nome;
-    let infoUtilizador = document.createElement("p");
-    let userId = document.createElement("p");
+    var infoUtilizador = document.createElement("p");
+    var userId = document.createElement("p");
     userId.textContent = "ID: " + user.id;
     infoUtilizador.textContent = user.email;
     elementoLista.appendChild(containerUtilizador);
@@ -57,9 +58,9 @@ function renderUserCard(user) {
 //   activeUsersPercentage() 
 // }
 function renderUtilizadores(lista) {
-    let listaDeUtilizadores = document.getElementById("dadosUtilizador");
+    var listaDeUtilizadores = document.getElementById("dadosUtilizador");
     listaDeUtilizadores.innerHTML = "";
-    for (let i = 0; i < lista.length; i++) {
+    for (var i = 0; i < lista.length; i++) {
         listaDeUtilizadores.appendChild(renderUserCard(lista[i]));
     }
     renderTotalUsersBadge();
@@ -68,7 +69,7 @@ function renderUtilizadores(lista) {
     renderActiveUsersPercentage();
 }
 function addLogInState(user) {
-    let span = document.createElement("span");
+    var span = document.createElement("span");
     if (user.ativo == true) {
         span.textContent = " Logged in";
         span.classList.add("activo");
@@ -80,28 +81,28 @@ function addLogInState(user) {
     return span;
 }
 function createBtnSeeMore(user) {
-    let btnVerMais = document.createElement("button");
+    var btnVerMais = document.createElement("button");
     btnVerMais.textContent = "See more";
-    btnVerMais.addEventListener("click", () => renderModalUser(user.id));
+    btnVerMais.addEventListener("click", function () { return renderModalUser(user.id); });
     return btnVerMais;
 }
 function createBtnRemove(user) {
-    let btnRemover = document.createElement("button");
+    var btnRemover = document.createElement("button");
     btnRemover.textContent = "Remove";
-    btnRemover.addEventListener("click", () => removeUsers(user.id));
+    btnRemover.addEventListener("click", function () { return removeUsers(user.id); });
     return btnRemover;
 }
 function createBtnActivateToggle(user) {
-    let btnDesativar = document.createElement("button");
+    var btnDesativar = document.createElement("button");
     btnDesativar.textContent = "Activate toggle";
-    btnDesativar.addEventListener("click", () => {
+    btnDesativar.addEventListener("click", function () {
         switchUserState(user.id);
         renderInactiveUsersBadge();
     });
     return btnDesativar;
 }
 function switchUserState(identificador) {
-    let utilizadorParaDesativar = (listaUtilizadores.filter((utilizador) => utilizador.id == identificador))[0];
+    var utilizadorParaDesativar = (listaUtilizadores.filter(function (utilizador) { return utilizador.id == identificador; }))[0];
     if (utilizadorParaDesativar.ativo) {
         utilizadorParaDesativar.ativo = false;
     }
@@ -111,68 +112,68 @@ function switchUserState(identificador) {
     renderUtilizadores(listaUtilizadores);
 }
 function createBtnShowActiveUsers() {
-    let btnMostrarAtivos = document.getElementById("btnSoAtivos");
-    btnMostrarAtivos.addEventListener("click", () => renderLoggedInUsers());
+    var btnMostrarAtivos = document.getElementById("btnSoAtivos");
+    btnMostrarAtivos.addEventListener("click", function () { return renderLoggedInUsers(); });
 }
 function renderLoggedInUsers() {
-    let listaUtilizadoresAtivos = listaUtilizadores.filter((utilizador) => utilizador.ativo == true);
+    var listaUtilizadoresAtivos = listaUtilizadores.filter(function (utilizador) { return utilizador.ativo == true; });
     renderUtilizadores(listaUtilizadoresAtivos);
 }
 function getNewUserFormData() {
-    let formNewUser = document.getElementById("formNewUser");
-    let inputNome = document.getElementById("nomeUtilizador");
-    let inputEmail = document.getElementById("emailUtilizador");
-    let array = [];
-    formNewUser.addEventListener("submit", (event) => {
+    var formNewUser = document.getElementById("formNewUser");
+    var inputNome = document.getElementById("nomeUtilizador");
+    var inputEmail = document.getElementById("emailUtilizador");
+    var array = [];
+    formNewUser.addEventListener("submit", function (event) {
         event.preventDefault();
         array = createNewUser(inputNome, inputEmail);
     });
 }
 function createNewUser(nomeDoUtilizador, emailDoUtilizador) {
-    let nome = nomeDoUtilizador.value;
-    let email = emailDoUtilizador.value;
-    let listaAtb = [];
+    var nome = nomeDoUtilizador.value;
+    var email = emailDoUtilizador.value;
+    var listaAtb = [];
     listaAtb.push(nome, email);
-    let id = Date.now();
-    for (let i = 0; i <= 5; i++) {
+    var id = Date.now();
+    for (var i = 0; i <= 5; i++) {
         id = id + 1;
     }
-    let novoUtilizador = new Utilizador(id, nome, email);
+    var novoUtilizador = new Utilizador(id, nome, email);
     listaUtilizadores.push(novoUtilizador);
     renderUtilizadores(listaUtilizadores);
     return listaAtb;
 }
 function renderAtiveUsersBadge() {
-    let contadorAtivos = document.getElementById("utilizadoresAtivos");
-    let listaUtilizadoresAtivos = listaUtilizadores.filter((utilizador) => utilizador.ativo == true);
+    var contadorAtivos = document.getElementById("utilizadoresAtivos");
+    var listaUtilizadoresAtivos = listaUtilizadores.filter(function (utilizador) { return utilizador.ativo == true; });
     contadorAtivos.textContent = String(listaUtilizadoresAtivos.length);
     return listaUtilizadoresAtivos.length;
 }
 function renderTotalUsersBadge() {
-    let contador = listaUtilizadores.length;
-    let badge = document.getElementById("utilizadoresTotais");
+    var contador = listaUtilizadores.length;
+    var badge = document.getElementById("utilizadoresTotais");
     badge.textContent = String(contador);
 }
 function renderInactiveUsersBadge() {
-    let contadorInativos = document.getElementById("utilizadoresInativos");
-    let listaUtilizadoresInativos = listaUtilizadores.filter(utilizador => utilizador.ativo == false);
-    let numContadorInativo = listaUtilizadoresInativos.length;
+    var contadorInativos = document.getElementById("utilizadoresInativos");
+    var listaUtilizadoresInativos = listaUtilizadores.filter(function (utilizador) { return utilizador.ativo == false; });
+    var numContadorInativo = listaUtilizadoresInativos.length;
     contadorInativos.textContent = String(numContadorInativo);
 }
 function removeUsers(identificador) {
-    let listaSemInativos = listaUtilizadores.filter(utilizador => utilizador.id != identificador);
+    var listaSemInativos = listaUtilizadores.filter(function (utilizador) { return utilizador.id != identificador; });
     listaUtilizadores = listaSemInativos;
     renderUtilizadores(listaUtilizadores);
 }
 function createBtnSearch() {
-    let inputPesquisa = document.getElementById("pesquisaUtilizadores");
-    let btnPesquisa = document.getElementById("pesquisar");
-    inputPesquisa.addEventListener("input", () => searchUser(inputPesquisa.value));
+    var inputPesquisa = document.getElementById("pesquisaUtilizadores");
+    var btnPesquisa = document.getElementById("pesquisar");
+    inputPesquisa.addEventListener("input", function () { return searchUser(inputPesquisa.value); });
 }
 function searchUser(palavraInserida) {
-    let listaUserSearched = [];
-    for (let i = 0; i < listaUtilizadores.length; i++) {
-        let palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(palavraInserida);
+    var listaUserSearched = [];
+    for (var i = 0; i < listaUtilizadores.length; i++) {
+        var palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(palavraInserida);
         if (palavraMagica) {
             listaUserSearched.push(listaUtilizadores[i]);
         }
@@ -180,58 +181,62 @@ function searchUser(palavraInserida) {
     renderUtilizadores(listaUserSearched);
 }
 function renderModalUser(identificador) {
-    let user = (listaUtilizadores.filter(utilizador => utilizador.id == identificador))[0];
-    let modal = document.getElementById("modalReservas");
-    let titulo = document.getElementById("userName");
+    var user = (listaUtilizadores.filter(function (utilizador) { return utilizador.id == identificador; }))[0];
+    var modal = document.getElementById("modalReservas");
+    var titulo = document.getElementById("userName");
     titulo.textContent = user.nome;
-    let email = document.getElementById("userEmail");
+    var email = document.getElementById("userEmail");
     email.textContent = user.email;
-    let toggleState = document.getElementById("userState");
+    var toggleState = document.getElementById("userState");
     if (user.ativo) {
         toggleState.textContent = "Utilizador activo";
     }
     else {
         toggleState.textContent = "Utilizador inactivo";
     }
-    let startingDate = document.getElementById("userAdesionDate");
+    var startingDate = document.getElementById("userAdesionDate");
     startingDate.textContent = "Utilizador aderiu na data" + String(Date.now());
     modal.classList.add("show");
 }
 function createBtnCloseModal() {
-    let btnFecharModal = document.getElementById("closeModal");
-    btnFecharModal.addEventListener("click", () => closeModal());
+    var btnFecharModal = document.getElementById("closeModal");
+    btnFecharModal.addEventListener("click", function () { return closeModal(); });
 }
 function closeModal() {
-    let modal = document.getElementById("modalReservas");
+    var modal = document.getElementById("modalReservas");
     modal.classList.remove("show");
 }
 function renderUserCount() {
-    let usersTotal = document.getElementById("statsTotal");
+    var usersTotal = document.getElementById("statsTotal");
     usersTotal.textContent = "Total of Users: " + String(listaUtilizadores.length) + " (both active and inactive)";
     return listaUtilizadores.length;
 }
 function renderActiveUsersPercentage() {
-    let usersActivePercentage = document.getElementById("activeUsersPercentage");
-    let totalAtivos = renderAtiveUsersBadge();
-    let totalUsers = renderUserCount();
-    let percentage = (totalAtivos / totalUsers) * 100;
+    var usersActivePercentage = document.getElementById("activeUsersPercentage");
+    var totalAtivos = renderAtiveUsersBadge();
+    var totalUsers = renderUserCount();
+    var percentage = (totalAtivos / totalUsers) * 100;
     usersActivePercentage.textContent = "Percentage of active users: " + String(percentage.toFixed(2)) + "%";
 }
 function loadUsers() {
     // let listaNewUser = 
     // console.log(listaNewUser); 
-    let biaGuerreiro = new Utilizador(Date.now(), "Beatriz Guerreiro", "bialarag@gmail.com");
-    let greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
-    listaUtilizadores.push(biaGuerreiro, greicelleSilva);
+    var biaGuerreiro = new Utilizador(Date.now(), "Beatriz Guerreiro", "bialarag@gmail.com");
+    var greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
+    var danielPina = new Utilizador(Date.now() + 2, "Daniel Pina", "danielteclado@gmail.com");
+    var tomasJose = new Utilizador(Date.now() + 3, "Tomás José", "tomecas@gmail.com");
+    // let calvinSilva = new Utilizador(Date.now() + 4, "Calvin Almeida", "calvinandhobbes@gmail.com");
+    // let lucasSilva = new Utilizador(Date.now() + 5, "Lucas Madeira", "calvinandlucas@gmail.com");
+    listaUtilizadores.push(biaGuerreiro, greicelleSilva, danielPina, tomasJose);
 }
 function createBtnAz() {
-    let btnAz = document.getElementById("orderAZ");
-    btnAz.addEventListener("click", (event) => {
+    var btnAz = document.getElementById("orderAZ");
+    btnAz.addEventListener("click", function (event) {
         event.stopPropagation();
         orderArray();
     });
 }
 function orderArray() {
-    let userOrdered = listaUtilizadores.sort((a, b) => a.nome.localeCompare(b.nome));
+    var userOrdered = listaUtilizadores.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
     renderUtilizadores(userOrdered);
 }

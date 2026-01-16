@@ -21,10 +21,17 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px; 
+  width: 100%;
 }
 
 label span {
   color: #e11d48;
+}
+
+.butones {
+  display: flex;
+  flex-direction: row;
 }
 
 button {
@@ -43,7 +50,6 @@ li {
   color: red; 
 }
 
-
 .badge {
   display: inline-block;
   padding: 0.25em 0.6em;
@@ -53,6 +59,11 @@ li {
   background-color: lightblue;
   border-radius: 999px; /* pill */
   vertical-align: middle;
+}
+
+.grid {
+  display: grid;
+  width: 100%;
 }
 
 .badgeInativos {
