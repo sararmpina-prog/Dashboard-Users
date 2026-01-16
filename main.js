@@ -160,11 +160,17 @@ function removeUsers(identificador) {
 function createBtnSearch() {
     var inputPesquisa = document.getElementById("pesquisaUtilizadores");
     var btnPesquisa = document.getElementById("pesquisar");
-    btnPesquisa.addEventListener("click", function () { return searchUser(inputPesquisa.value); });
+    inputPesquisa.addEventListener("input", function () { return searchUser(inputPesquisa.value); });
 }
 function searchUser(palavraInserida) {
-    var listaUtilizadoresPesquisados = listaUtilizadores.filter(function (utilizador) { return utilizador.nome == palavraInserida; });
-    renderUtilizadores(listaUtilizadoresPesquisados);
+    var listaUserSearched = [];
+    for (var i = 0; i < listaUtilizadores.length; i++) {
+        var palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(palavraInserida);
+        if (palavraMagica) {
+            listaUserSearched.push(listaUtilizadores[i]);
+        }
+    }
+    renderUtilizadores(listaUserSearched);
 }
 function renderModalUser(identificador) {
     var user = (listaUtilizadores.filter(function (utilizador) { return utilizador.id == identificador; }))[0];
