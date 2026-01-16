@@ -118,6 +118,8 @@ function renderUtilizadores(lista: Utilizador[]) {
   renderAtiveUsersBadge();
   renderUserCount();
   renderActiveUsersPercentage();  
+
+  return lista; 
 }
 
 
@@ -387,3 +389,16 @@ function loadUsers() {
 }
 
 
+// function createBtnAz () {
+//   let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
+
+//   btnAz.addEventListener("click", () => orderArray());
+// }
+
+// function orderArray () {
+
+//     listaUtilizadores = listaUtilizadores.sort()
+
+//     renderUtilizadores(listaUtilizadores); 
+
+// }

@@ -66,6 +66,7 @@ function renderUtilizadores(lista) {
     renderAtiveUsersBadge();
     renderUserCount();
     renderActiveUsersPercentage();
+    return lista;
 }
 function addLogInState(user) {
     var span = document.createElement("span");
@@ -215,3 +216,11 @@ function loadUsers() {
     var greicelleSilva = new Utilizador(2, "Greicelle Silva", "greicellesilva@gmail.com");
     listaUtilizadores.push(biaGuerreiro, greicelleSilva);
 }
+// function createBtnAz () {
+//   let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
+//   btnAz.addEventListener("click", () => orderArray());
+// }
+// function orderArray () {
+//     listaUtilizadores = listaUtilizadores.sort()
+//     renderUtilizadores(listaUtilizadores); 
+// }
