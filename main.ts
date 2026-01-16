@@ -287,19 +287,24 @@ function createBtnSearch() {
 
   let btnPesquisa = document.getElementById("pesquisar") as HTMLButtonElement;
 
-  btnPesquisa.addEventListener("click", () => searchUser(inputPesquisa.value))
+  inputPesquisa.addEventListener("input", () => searchUser(inputPesquisa.value))
 }
 
 
 
 function searchUser (palavraInserida: string) { 
 
-    let listaUtilizadoresPesquisados = listaUtilizadores.filter(utilizador => utilizador.nome == palavraInserida)
+  let listaUserSearched: Utilizador[] = []; 
 
-    renderUtilizadores(listaUtilizadoresPesquisados); 
+  for (let i=0; i < listaUtilizadores.length; i++) {
+    let palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(palavraInserida); 
+      if (palavraMagica) {
+        listaUserSearched.push(listaUtilizadores[i]); 
+      }
+  }
+
+  renderUtilizadores(listaUserSearched); 
 }
-
-
 
 
 
