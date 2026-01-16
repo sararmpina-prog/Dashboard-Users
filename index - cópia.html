@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+        <h1> User Dashboard </h1>
+          <div>
+      <label for="pesquisaUtilizadores"  type="text"
+            placeholder="Pesquise aqui"
+            aria-label="barra de pesquisa"></label>
+     <input id="pesquisaUtilizadores">
+     <button id="pesquisar">🔍</button>
+      </div>
+
+      <div>
+        <span class="badgeAtivos" id="utilizadoresAtivos">0</span>
+        <span class="badgeInativos" id="utilizadoresInativos">0</span>
+        <span class="badge" id="utilizadoresTotais">0</span>
+      </div>
+     
+      <button id="orderAZ">Ordenar A-Z</button>
+    </header>
+
+  
+    <div>
+      <ul id="dadosUtilizador" class="userTemplate">
+        <!-- <li>
+          <div id="dadosUtilizador">
+            <h2>Nome Pessoa   <span> logged in/out
+              <p>email
+              <p> ID
+            </p>
+            <button>
+            <button> Remover
+            <button> Ver mais
+          </div>
+          <div id="tarefas">
+          </div>
+        </li> -->
+      </ul>
+      <button id="btnSoAtivos">Show active users</button>
+    </div>
+    <form id="formNewUser">
+   
+      <legend>New user data:</legend>
+      <label for="nomeUtilizador">Name: </label>
+      <input id="nomeUtilizador" name="nome" type="text" required/>
+
+      <label for="emailUtilizador">Email: </label>
+      <input id="emailUtilizador" name="email" type="email" required/>
+      
+      <button id="btnGravar" type="submit">Save 🚀</button>
+    
+    </form>
+  <div
+      id="modalReservas"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitulo"
+    >
+    <div class="modal-content" id="modalUtilizador">
+      <h2 id="userName">
+      </h2>
+        <button id="closeModal" class="botao" aria-label="fechar o modal sobre o utilizador">
+          <i
+            class="fa-solid fa-xmark icon-cart"
+            aria-hidden="true"
+          ></i>
+        </button>
+      <p id="userEmail"></p>
+      <p id="userState"></p>
+      <p id="userAdesionDate"></p>
+    </div>
+
+    </div>
+    <section>
+      <h2>Stats Area</h2>
+      <p id="statsTotal">Total of Users: </p>
+      <p id="activeUsersPercentage">Percentage of active users:</p>
+    </section>
+    <script src="main.js"></script>
+  </body>
+</html>

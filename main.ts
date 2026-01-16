@@ -37,6 +37,7 @@ renderUtilizadores(listaUtilizadores);
 createBtnShowActiveUsers(); 
 createBtnSearch();
 createBtnCloseModal(); 
+createBtnAz (); 
 
 
 function renderUserCard(user: Utilizador) {
@@ -118,8 +119,6 @@ function renderUtilizadores(lista: Utilizador[]) {
   renderAtiveUsersBadge();
   renderUserCount();
   renderActiveUsersPercentage();  
-
-  return lista; 
 }
 
 
@@ -389,16 +388,19 @@ function loadUsers() {
 }
 
 
-// function createBtnAz () {
-//   let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
+function createBtnAz () {
+  let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
 
-//   btnAz.addEventListener("click", () => orderArray());
-// }
+  btnAz.addEventListener("click", (event) => {
+    event.stopPropagation(); 
+    orderArray()
+  }); 
+}
 
-// function orderArray () {
+function orderArray () {
+  
+  let userOrdered = listaUtilizadores.sort((a,b) => a.nome.localeCompare(b.nome))
 
-//     listaUtilizadores = listaUtilizadores.sort()
+  renderUtilizadores(userOrdered); 
 
-//     renderUtilizadores(listaUtilizadores); 
-
-// }
+}
