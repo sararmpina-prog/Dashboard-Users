@@ -25,15 +25,26 @@ class Utilizador implements UtilizadorInterface {
   }
 }
 
+let filterOrder: boolean = false; 
+let filterShowActive: boolean = false; 
+let filterWord: string = ""; 
 
 
 let listaUtilizadores: Utilizador[] = [];
 
 
+let InitialUsers = [
+    {id: 1, nome: "Beatriz Guerreiro", email: "bialarag@gmail.com"},
+    {id: 2, nome: "Greicelle Silva", email: "greicellesilva@gmail.com"},
+    {id: 3, nome: "Daniel Pina", email: "danielteclado@gmail.com"},
+    {id: 4, nome: "Tomás José", email: "tomecas@gmail.com"},
+    {id: 5, nome: "Ana Luísa", email: "anuxaHspl@gmail.com"},
+    {id: 6, nome: "Ricky", email: "tom&Jerry@gmail.com"},
+]; 
+
 
 getNewUserFormData(); 
-loadUsers(); 
-renderUtilizadores(listaUtilizadores);
+loadInitialUsers(); 
 createBtnShowActiveUsers(); 
 createBtnSearch();
 createBtnCloseModal(); 
@@ -83,36 +94,43 @@ function renderUserCard(user: Utilizador) {
 
 
 
-// function renderUser() {
-//   let lista: Utilizador[] = listaUtilizadores; 
+function renderUtilizadores() {
 
-//   if (filterUsers == true) {
-//       lista =listaUtilizadores.filter((utilizador) => utilizador.ativo == true);
-//   } 
-  
-
-//   let listaDeUtilizadores = document.getElementById("dadosUtilizador" ) as HTMLUListElement;
-//   listaDeUtilizadores.innerHTML = "";
-
-//   for (let i = 0; i < lista.length; i++) {
-//     listaDeUtilizadores.appendChild(renderUserCard(lista[i]))
-//   }
-
-  
-//   badgeUtilizadores();
-//   badgeAtivos(); 
-//   usersTotalStats();
-//   activeUsersPercentage() 
-// }
-
-
-function renderUtilizadores(lista: Utilizador[]) {
   let listaDeUtilizadores = document.getElementById("dadosUtilizador" ) as HTMLUListElement;
+
   listaDeUtilizadores.innerHTML = "";
 
-  for (let i = 0; i < lista.length; i++) {
+  let lista = listaUtilizadores; 
+  
+  if (filterWord) {
+    let listaUserSearched: Utilizador[] = []; 
+
+    for (let i=0; i < listaUtilizadores.length; i++) {
+      let palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(filterWord); 
+        if (palavraMagica) {
+          listaUserSearched.push(listaUtilizadores[i]); 
+        }
+    }
+    lista = listaUserSearched; 
+  }
+
+  if (filterOrder == true) {
+    let userOrdered = lista.sort((a,b) => a.nome.localeCompare(b.nome))
+    lista = userOrdered; 
+  }
+ 
+  if (filterShowActive == true)  {
+    let listaUtilizadoresAtivos = lista.filter((utilizador) => utilizador.ativo == true);
+   lista = listaUtilizadoresAtivos; 
+   
+  }
+
+
+
+    for (let i = 0; i < lista.length; i++) {
     listaDeUtilizadores.appendChild(renderUserCard(lista[i]))
   }
+  
 
   
   renderTotalUsersBadge(); 
@@ -175,7 +193,11 @@ function createBtnActivateToggle (user: Utilizador) {
 
 function switchUserState(identificador: number) {
  
-  let utilizadorParaDesativar  = (listaUtilizadores.filter((utilizador) => utilizador.id == identificador))[0];
+  let listaUtilizadorParaDesativar  = listaUtilizadores.filter((utilizador) => utilizador.id == identificador);
+
+  let utilizadorParaDesativar = listaUtilizadorParaDesativar[0]
+
+  //tenho que remover o utilizador do meu array
 
   if (utilizadorParaDesativar.ativo) {
     utilizadorParaDesativar.ativo = false;
@@ -183,7 +205,7 @@ function switchUserState(identificador: number) {
     utilizadorParaDesativar.ativo = true;
   }
 
-  renderUtilizadores(listaUtilizadores);
+  renderUtilizadores();
 }
 
 
@@ -197,9 +219,9 @@ function createBtnShowActiveUsers () {
 
 function renderLoggedInUsers() {
 
-  let listaUtilizadoresAtivos = listaUtilizadores.filter((utilizador) => utilizador.ativo == true);
+  filterShowActive = true; 
 
-  renderUtilizadores(listaUtilizadoresAtivos);
+  renderUtilizadores();
 }
 
 
@@ -242,7 +264,7 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
 
   listaUtilizadores.push(novoUtilizador);
 
-  renderUtilizadores(listaUtilizadores);
+  renderUtilizadores();
 
   return listaAtb; 
 }
@@ -291,7 +313,7 @@ function removeUsers (identificador: number) {
 
    listaUtilizadores = listaSemInativos; 
 
-  renderUtilizadores(listaUtilizadores); 
+  renderUtilizadores(); 
 }
 
 
@@ -308,16 +330,9 @@ function createBtnSearch() {
 
 function searchUser (palavraInserida: string) { 
 
-  let listaUserSearched: Utilizador[] = []; 
+  filterWord = palavraInserida; 
 
-  for (let i=0; i < listaUtilizadores.length; i++) {
-    let palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(palavraInserida); 
-      if (palavraMagica) {
-        listaUserSearched.push(listaUtilizadores[i]); 
-      }
-  }
-
-  renderUtilizadores(listaUserSearched); 
+  renderUtilizadores(); 
 }
 
 
@@ -391,25 +406,14 @@ function renderActiveUsersPercentage() {
 }
 
 
-function loadUsers() {
+function loadInitialUsers() {
 
-  // let listaNewUser = 
-  // console.log(listaNewUser); 
+    for (let i=0; i<InitialUsers.length; i++) {
+        let newUser = new Utilizador (InitialUsers[i].id, InitialUsers[i].nome, InitialUsers[i].email); 
+        listaUtilizadores.push(newUser); 
+    }
 
- let biaGuerreiro = new Utilizador(Date.now(), "Beatriz Guerreiro", "bialarag@gmail.com");
-
-  let greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
-
-  let danielPina = new Utilizador(Date.now() + 2, "Daniel Pina", "danielteclado@gmail.com");
-
-  let tomasJose = new Utilizador(Date.now() + 3, "Tomás José", "tomecas@gmail.com");
-
-  // let calvinSilva = new Utilizador(Date.now() + 4, "Calvin Almeida", "calvinandhobbes@gmail.com");
-
-  // let lucasSilva = new Utilizador(Date.now() + 5, "Lucas Madeira", "calvinandlucas@gmail.com");
-
-  listaUtilizadores.push(biaGuerreiro, greicelleSilva, danielPina, tomasJose);
-
+    renderUtilizadores(); 
 }
 
 
@@ -423,10 +427,11 @@ function createBtnAz () {
 }
 
 function orderArray () {
-  
-  let userOrdered = listaUtilizadores.sort((a,b) => a.nome.localeCompare(b.nome))
 
-  renderUtilizadores(userOrdered); 
+  filterOrder = true; 
+  
+  renderUtilizadores(); 
+
 }
  
 
