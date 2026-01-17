@@ -28,6 +28,7 @@ createBtnShowActiveUsers();
 createBtnSearch();
 createBtnCloseModal();
 createBtnAz();
+createBtnResetFilter();
 function renderUserCard(user) {
     var elementoLista = document.createElement("li");
     elementoLista.setAttribute("class", "userCard");
@@ -53,6 +54,7 @@ function renderUserCard(user) {
     return elementoLista;
 }
 function renderUtilizadores() {
+    renderDebugData();
     var listaDeUtilizadores = document.getElementById("dadosUtilizador");
     listaDeUtilizadores.innerHTML = "";
     var lista = listaUtilizadores;
@@ -67,7 +69,8 @@ function renderUtilizadores() {
         lista = listaUserSearched;
     }
     if (filterOrder == true) {
-        var userOrdered = lista.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
+        var listaCopiada = lista.slice();
+        var userOrdered = listaCopiada.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
         lista = userOrdered;
     }
     if (filterShowActive == true) {
@@ -77,6 +80,8 @@ function renderUtilizadores() {
     for (var i = 0; i < lista.length; i++) {
         listaDeUtilizadores.appendChild(renderUserCard(lista[i]));
     }
+    renderFilterBtnOrder();
+    renderFilterBtnActiveUsers();
     renderTotalUsersBadge();
     renderAtiveUsersBadge();
     renderUserCount();
@@ -237,12 +242,52 @@ function loadInitialUsers() {
 }
 function createBtnAz() {
     var btnAz = document.getElementById("orderAZ");
-    btnAz.addEventListener("click", function (event) {
-        event.stopPropagation();
+    btnAz.addEventListener("click", function () {
+        // event.stopPropagation(); 
         orderArray();
     });
 }
 function orderArray() {
     filterOrder = true;
     renderUtilizadores();
+}
+function createBtnResetFilter() {
+    var btnResetFilters = document.getElementById("btnResetAllFilters");
+    btnResetFilters.addEventListener("click", function () { return resetAllFilters(); });
+}
+function resetAllFilters() {
+    filterOrder = false;
+    alert(filterOrder);
+    filterShowActive = false;
+    filterWord = "";
+    renderUtilizadores();
+}
+function renderFilterBtnActiveUsers() {
+    var btnMostrarAtivos = document.getElementById("btnSoAtivos");
+    if (filterShowActive == true) {
+        btnMostrarAtivos.classList.add("filterActive");
+    }
+    else {
+        btnMostrarAtivos.classList.remove("filterActive");
+    }
+}
+function renderFilterBtnOrder() {
+    var btnAz = document.getElementById("orderAZ");
+    if (filterOrder == true) {
+        btnAz.classList.add("filterActive");
+    }
+    else {
+        btnAz.classList.remove("filterActive");
+    }
+}
+function renderDebugData() {
+    var debugDiv = document.querySelector("#debug");
+    var divTasks = document.createElement("div");
+    debugDiv.innerHTML = "";
+    for (var i = 0; i < listaUtilizadores.length; i++) {
+        var line = document.createElement("div");
+        line.textContent = JSON.stringify(listaUtilizadores[i]);
+        debugDiv.appendChild(line);
+    }
+    debugDiv.appendChild(divTasks);
 }

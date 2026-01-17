@@ -161,3 +161,7 @@ header {
   justify-content: center;
   align-items: center;
 }
+
+.filterActive {
+  border: 2px solid red; 
+}

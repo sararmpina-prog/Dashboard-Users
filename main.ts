@@ -49,6 +49,8 @@ createBtnShowActiveUsers();
 createBtnSearch();
 createBtnCloseModal(); 
 createBtnAz (); 
+createBtnResetFilter(); 
+
 
 
 function renderUserCard(user: Utilizador) {
@@ -95,6 +97,7 @@ function renderUserCard(user: Utilizador) {
 
 
 function renderUtilizadores() {
+  renderDebugData();
 
   let listaDeUtilizadores = document.getElementById("dadosUtilizador" ) as HTMLUListElement;
 
@@ -115,24 +118,22 @@ function renderUtilizadores() {
   }
 
   if (filterOrder == true) {
-    let userOrdered = lista.sort((a,b) => a.nome.localeCompare(b.nome))
+    let listaCopiada = lista.slice(); 
+    let userOrdered = listaCopiada.sort((a,b) => a.nome.localeCompare(b.nome))
     lista = userOrdered; 
   }
  
   if (filterShowActive == true)  {
     let listaUtilizadoresAtivos = lista.filter((utilizador) => utilizador.ativo == true);
    lista = listaUtilizadoresAtivos; 
-   
-  }
-
-
+  } 
 
     for (let i = 0; i < lista.length; i++) {
     listaDeUtilizadores.appendChild(renderUserCard(lista[i]))
   }
   
-
-  
+  renderFilterBtnOrder(); 
+  renderFilterBtnActiveUsers(); 
   renderTotalUsersBadge(); 
   renderAtiveUsersBadge();
   renderUserCount();
@@ -220,6 +221,7 @@ function createBtnShowActiveUsers () {
 function renderLoggedInUsers() {
 
   filterShowActive = true; 
+
 
   renderUtilizadores();
 }
@@ -420,8 +422,8 @@ function loadInitialUsers() {
 function createBtnAz () {
   let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
 
-  btnAz.addEventListener("click", (event) => {
-    event.stopPropagation(); 
+  btnAz.addEventListener("click", () => {
+    // event.stopPropagation(); 
     orderArray()
   }); 
 }
@@ -434,4 +436,62 @@ function orderArray () {
 
 }
  
+function createBtnResetFilter() {
+   let btnResetFilters = document.getElementById("btnResetAllFilters") as HTMLButtonElement;
+  
+  btnResetFilters.addEventListener("click", () => resetAllFilters())
+}
 
+  function resetAllFilters() {
+
+    filterOrder = false; 
+    alert(filterOrder); 
+
+    filterShowActive = false; 
+
+    filterWord= ""; 
+
+    renderUtilizadores(); 
+  }
+
+function renderFilterBtnActiveUsers () {
+
+  let btnMostrarAtivos = document.getElementById("btnSoAtivos") as HTMLButtonElement;
+  
+  if (filterShowActive == true) {
+    btnMostrarAtivos.classList.add("filterActive"); 
+  } else {
+     btnMostrarAtivos.classList.remove("filterActive"); 
+  }
+  
+}
+
+
+
+function renderFilterBtnOrder () {
+
+  let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
+
+  if (filterOrder == true) {
+    btnAz.classList.add("filterActive"); 
+  } else {
+     btnAz.classList.remove("filterActive"); 
+  }
+}
+
+
+function renderDebugData() {
+    let debugDiv = document.querySelector("#debug") as HTMLDivElement;
+    let divTasks = document.createElement("div") as HTMLDivElement; 
+
+    debugDiv.innerHTML = "";
+
+    for (let i = 0; i < listaUtilizadores.length; i++) {
+        const line = document.createElement("div");
+        line.textContent = JSON.stringify(listaUtilizadores[i]);
+        debugDiv.appendChild(line);
+    }
+
+    debugDiv.appendChild(divTasks);
+ 
+}
