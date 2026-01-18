@@ -11,10 +11,12 @@
     />
   </head>
   <body>
+
     <header>
-      <h1>User Dashboard</h1>
+      <h1>USERS DASHBOARD</h1>
     </header>
 
+    <main>
     <section class="utilities">
       <div>
         <span class="badgeAtivos" id="utilizadoresAtivos" title="Total de utilizadores activos">0</span>
@@ -22,8 +24,7 @@
         <span class="badge" id="utilizadoresTotais">0</span>
       </div>
 
-      <div>
-        <p id="statsTotal">Total of Users:</p>
+      <div id="estatistica">
         <p id="activeUsersPercentage">Percentage of active users:</p>
       </div>
 
@@ -36,9 +37,9 @@
 
         <button id="btnGravar" type="submit">Save 🚀</button>
       </form>
+
       <div class="butones">
            <button id="orderAZ">Ordenar A-Z</button>
-
           <button id="btnSoAtivos">Show active users</button>
           <button id="btnResetAllFilters">Reset all filters</button>
       </div>
@@ -61,7 +62,7 @@
         <ul id="dadosUtilizador" class="userTemplate"></ul>
       </div>
     </section>
-
+ </main>
     <div
       id="modalReservas"
       class="modal"
@@ -70,14 +71,14 @@
       aria-labelledby="modalTitulo"
     >
       <div class="modal-content" id="modalUtilizador">
-        <h2 id="userName"></h2>
         <button
           id="closeModal"
           class="botao"
           aria-label="fechar o modal sobre o utilizador"
-        >
-          <i class="fa-solid fa-xmark icon-cart" aria-hidden="true"></i>
-        </button>
+        ><i class="fa-solid fa-xmark icon-cart" aria-hidden="true"></i></button>
+          
+          <h2 id="userName"></h2>
+        
         <p id="userEmail"></p>
         <p id="userState"></p>
         <p id="userAdesionDate"></p>

@@ -387,7 +387,6 @@ function closeModal() {
 function renderUserCount() {
 
     let usersTotal = document.getElementById("statsTotal") as HTMLParagraphElement; 
-    usersTotal.textContent = "Total of Users: " + String(listaUtilizadores.length) + " (both active and inactive)"
 
     return listaUtilizadores.length
 }
