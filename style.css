@@ -1,167 +1,239 @@
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  margin: 0; 
-  padding: 0;
-  line-height: 1.2;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background-color: #f3f4f6;
+  color: #111827;
 }
 
-h1 {
-  text-transform: uppercase;
-  font-weight: bold;
+
+header {
+  min-height: 45vh;
+  background: whitesmoke; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8%;
 }
+
+header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: 600px;
+}
+
 
 .utilities {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px; 
-  width: 100%;
+  background-color: whitesmoke; 
+  margin-top: -60px;
+  border-radius: 32px 32px 0 0;
+  padding: 60px 8% 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
 }
 
-label span {
-  color: #e11d48;
+
+.utilities span {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.butones {
-  display: flex;
-  flex-direction: row;
-}
-
-button {
-  margin-left: 5px;
-}
-
-li {
- list-style: none;
-}
-
-.activo {
-  color: green; 
-}
-
-.desativo {
-  color: red; 
+.badge,
+.badgeAtivos,
+.badgeInativos {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
 }
 
 .badge {
-  display: inline-block;
-  padding: 0.25em 0.6em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: black; 
-  background-color: lightblue;
-  border-radius: 999px; /* pill */
-  vertical-align: middle;
-}
-
-.grid {
-  display: grid;
-  width: 100%;
-}
-
-.badgeInativos {
-  display: inline-block;
-  padding: 0.25em 0.6em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #e11d48; /* vermelho */
-  border-radius: 999px; /* pill */
-  vertical-align: middle;
+  background-color: #111827;
 }
 
 .badgeAtivos {
-   display: inline-block;
-  padding: 0.25em 0.6em;
-  font-size: 0.75rem;
+  background-color: #22c55e;
+}
+
+.badgeInativos {
+  background-color: #ef4444;
+}
+
+/* STATS */
+.utilities p {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* ===================== */
+/* FORM */
+/* ===================== */
+#formNewUser {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#formNewUser label {
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #fff;
-  background-color: green; 
-  border-radius: 999px; /* pill */
-  vertical-align: middle;
 }
 
-.modal {
-  opacity: 0;
-  visibility: hidden;
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+#formNewUser input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
 }
 
-.modal-content {
-  background-color: whitesmoke; 
+#formNewUser button {
+  margin-top: 10px;
+  padding: 10px;
   border-radius: 10px;
-  padding: 2rem;
-  width: clamp(300px, 60%, 600px); /* clamp para o 'width' responsivo */
-  max-height: 90vh;
-  overflow-y: auto;
+  border: none;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#formNewUser button:hover {
+  background-color: #2563eb;
+}
+
+/* ===================== */
+/* BUTTONS */
+/* ===================== */
+.butones {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
-  transform: translateY(-20px);
-  transition: transform 0.3s ease;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.modal.show {
-  opacity: 1;
-  visibility: visible;
-  color: black; 
+.butones button,
+.utilities button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: #e5e7eb;
+  cursor: pointer;
+  font-size: 0.8rem;
 }
 
-.botao {
-    border: 1px solid black;
-    background-color: whitesmoke;
-    cursor: pointer;
-    border-radius: 50%;
+.butones button:hover {
+  background-color: #d1d5db;
 }
 
-.userCard {
-  background: whitesmoke; 
-  border-radius: 12px;
-  padding: 16px;
-  width: 300px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
+/* ===================== */
+/* SEARCH */
+/* ===================== */
+.utilities input#pesquisaUtilizadores {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.utilities #pesquisar {
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+/* ===================== */
+/* GRID DE UTILIZADORES */
+/* ===================== */
+.grid {
+  background-color: #ffffff;
+  padding: 40px 8% 80px;
 }
 
 .userTemplate {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  width: 100%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
 
-
-button {
-  border-radius: 5px;
-}
-
-header {
+/* ===================== */
+/* USER CARD (LI) */
+/* ===================== */
+.userTemplate li {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.filterActive {
-  border: 2px solid red; 
+.userTemplate li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* BOTÕES DENTRO DO CARD */
+.userTemplate li button {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+/* ===================== */
+/* MODAL */
+/* ===================== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 320px;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+}
+
+#closeModal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ===================== */
+/* RESPONSIVE */
+/* ===================== */
+@media (max-width: 900px) {
+  .utilities {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
 }
