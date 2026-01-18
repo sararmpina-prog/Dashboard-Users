@@ -1,190 +1,340 @@
-* {
-  box-sizing: border-box;
-}
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  margin: 0; 
-  padding: 0;
-  line-height: 1.2;
-}
+   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: whitesmoke;
+    line-height: 1.2;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    gap: 10px;
+    padding-bottom: 24px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    margin: 50px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+  }
+  
+  main {
+    background-color: #f8fafc;
+    width: min(1100px, calc(100% - 48px));
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
 
-h1 {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.butones button {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background-color: wheat; 
-}
-
-
-
-input#pesquisaUtilizadores {
-  width: 60%;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid grey;
-}
-
-button#pesquisar {
-  border-radius: 6px;
-  border: 1px solid grey;
-  width: 20%;
-  padding: 6px;
-}
-
-
-.utilities {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px; 
-  width: 100%;
-}
-
-label span {
-  color: #e11d48;
-}
-
-.butones {
-  display: flex;
-  flex-direction: row;
-}
+  .utilities {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+ 
 
 
+  .badge,
+  .badgeAtivos,
+  .badgeInativos {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  
+ 
+  .badge {
+    background-color: #ef4444;
+    color: white;
+  }
+  
 
-li {
- list-style: none;
-}
+  .badgeAtivos {
+    background-color: #16a34a;
+    color: white;
+  }
+  
+  .badgeInativos {
+    background-color: #e11d48;
+    color: white;
+  }
+  
+  /* percentagem */
+  #estatistica {
+    display: flex;
+    justify-content: center;
+    color: #111827;
+    font-size: 0.95rem;
+  }
+  
+  
+  #formNewUser {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+    row-gap: 8px;
+  }
+  
 
-.activo {
-  color: green; 
-}
+  #formNewUser label {
+    font-size: 0.85rem;
+    color: #111827;
+  }
+  
+  label span {
+    color: #e11d48;
+  }
+  
 
-.desativo {
-  color: red; 
-}
+  #formNewUser input {
+    height: 38px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid grey;
+    width: 100%;
+  }
 
-.badge {
-  display: inline-block;
-  padding: 0.25em 0.6em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: black; 
-  background-color: lightblue;
-  border-radius: 999px; /* pill */
-  vertical-align: middle;
-}
 
-.grid {
-  display: grid;
-  width: 100%;
-}
+  #formNewUser label[for="nomeUtilizador"] {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  #formNewUser input#nomeUtilizador {
+    grid-column: 1;
+    grid-row: 2;
+  } 
+  
+  
+  #formNewUser label[for="emailUtilizador"] {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  #formNewUser input#emailUtilizador {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  
 
-.badgeInativos {
-  display: inline-block;
-  padding: 0.25em 0.6em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #e11d48; /* vermelho */
-  border-radius: 999px; /* pill */
-  vertical-align: middle;
-}
-
-.badgeAtivos {
-   display: inline-block;
-  padding: 0.25em 0.6em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: green; 
-  border-radius: 999px; /* pill */
-  vertical-align: middle;
-}
-
-.modal {
-  opacity: 0;
-  visibility: hidden;
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.modal-content {
-  background-color: whitesmoke; 
-  border-radius: 10px;
-  padding: 2rem;
-  width: clamp(300px, 60%, 600px); /* clamp para o 'width' responsivo */
-  max-height: 90vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
-  transform: translateY(-20px);
-  transition: transform 0.3s ease;
-}
-
-.modal.show {
-  opacity: 1;
-  visibility: visible;
-  color: black; 
-}
-
-.botao {
-    border: 1px solid black;
-    background-color: whitesmoke;
+  #btnGravar {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  
+    height: 38px;
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 0 14px;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 50%;
-}
-
-.userCard {
-  background: whitesmoke; 
-  border-radius: 12px;
-  padding: 16px;
-  width: 300px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.userTemplate {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  width: 100%;
-}
+  }
 
 
-button {
-  border-radius: 5px;
-}
+  .butones {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    width: 100%;
+  }
+  
+  .butones button {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: wheat;
+  }
+  
 
-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  .filterActive {
+    outline: 2px solid #ef4444;
+  }
+  
 
-.filterActive {
-  border: 2px solid red; 
-}
+  .utilities > div:last-child {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  input#pesquisaUtilizadores {
+    width: 80%;
+    height: 38px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid grey;
+  }
+  
+  button#pesquisar {
+    width: 10%;
+    height: 38px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    background: white;
+    cursor: pointer;
+  }
+  
+
+  .grid {
+    width: 100%;
+  }
+  
+  .userTemplate {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    gap: 14px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .userCard {
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  
+  .userCard h2 {
+    font-size: 1.05rem;
+  }
+  
+  .userCard p {
+    font-size: 0.95rem;
+    color: #111827;
+  }
+  
+  .activo {
+    color: #16a34a;
+    font-weight: 600;
+  }
+  
+  .desativo {
+    color: #dc2626;
+    font-weight: 600;
+  }
+  
+  /* botões no card (teal) */
+  .userCard button {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: teal;
+    color: white;
+  }
+  
+  .userCard button + button {
+    margin-left: 6px;
+  }
+  
+  /* ===== Modal ===== */
+  .modal {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .modal-content {
+    background-color: #f8fafc;
+    border-radius: 16px;
+    padding: 24px;
+    width: clamp(300px, 60%, 600px);
+    max-height: 90vh;
+    overflow-y: auto;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  
+    position: relative;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+  }
+  
+  .modal.show {
+    opacity: 1;
+    visibility: visible;
+    color: black;
+  }
+  
+  .modal.show .modal-content {
+    transform: translateY(0);
+  }
+  
+  .botao {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 999px;
+  
+    width: 34px;
+    height: 34px;
+  
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  
+  /* ===== Footer debug (discreto) ===== */
+  footer {
+    width: min(1100px, calc(100% - 48px));
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background-color: rgba(255, 228, 196, 0.6);
+    font-size: 0.85rem;
+    color: #111827;
+  }

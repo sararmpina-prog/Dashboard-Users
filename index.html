@@ -13,19 +13,18 @@
   <body>
 
     <header>
-      <h1>USERS DASHBOARD</h1>
+      <h1>USERS DASHBOARD
+        <span class="badgeAtivos" id="utilizadoresAtivos" title="Total de utilizadores activos" alt="Total de utilizadores activos">0</span>
+        <span class="badgeInativos" id="utilizadoresInativos" title="Total de utilizadores inactivos" alt="Total de utilizadores inactivos">0</span>
+        <span class="badge" id="utilizadoresTotais" title="Total de utilizadores totais" alt="Total de utilizadores totais">0</span>
+      </h1>
     </header>
 
     <main>
     <section class="utilities">
-      <div>
-        <span class="badgeAtivos" id="utilizadoresAtivos" title="Total de utilizadores activos">0</span>
-        <span class="badgeInativos" id="utilizadoresInativos">0</span>
-        <span class="badge" id="utilizadoresTotais">0</span>
-      </div>
 
       <div id="estatistica">
-        <p id="activeUsersPercentage">Percentage of active users:</p>
+        <p id="activeUsersPercentage">Active users:</p>
       </div>
 
       <form id="formNewUser">
@@ -55,14 +54,18 @@
         <input id="pesquisaUtilizadores" />
         <button id="pesquisar">🔍</button>
       </div>
+
     </section>
 
     <section class="grid">
+
       <div>
         <ul id="dadosUtilizador" class="userTemplate"></ul>
       </div>
+
     </section>
  </main>
+
     <div
       id="modalReservas"
       class="modal"
@@ -84,6 +87,7 @@
         <p id="userAdesionDate"></p>
       </div>
     </div>
+    
     <footer style="background-color: bisque;">
       <div id="debug"></div>
      </footer>

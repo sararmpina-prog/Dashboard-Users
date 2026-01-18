@@ -229,7 +229,7 @@ function renderActiveUsersPercentage() {
     let totalAtivos = renderAtiveUsersBadge();
     let totalUsers = renderUserCount();
     let percentage = (totalAtivos / totalUsers) * 100;
-    usersActivePercentage.textContent = "Percentage of active users: " + String(percentage.toFixed(2)) + "%";
+    usersActivePercentage.textContent = "Active users: " + String(percentage.toFixed(2)) + "%";
 }
 function loadInitialUsers() {
     for (let i = 0; i < InitialUsers.length; i++) {

@@ -402,7 +402,7 @@ function renderActiveUsersPercentage() {
 
     let percentage: number = (totalAtivos/totalUsers)*100; 
 
-    usersActivePercentage.textContent = "Percentage of active users: " + String(percentage.toFixed(2)) + "%"; 
+    usersActivePercentage.textContent = "Active users: " + String(percentage.toFixed(2)) + "%"; 
 
 }
 
