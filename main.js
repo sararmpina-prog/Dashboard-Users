@@ -122,7 +122,6 @@ function createBtnActivateToggle(user) {
 function switchUserState(identificador) {
     let listaUtilizadorParaDesativar = listaUtilizadores.filter((utilizador) => utilizador.id == identificador);
     let utilizadorParaDesativar = listaUtilizadorParaDesativar[0];
-    //tenho que remover o utilizador do meu array
     if (utilizadorParaDesativar.ativo) {
         utilizadorParaDesativar.ativo = false;
     }
@@ -203,13 +202,17 @@ function renderModalUser(identificador) {
     email.textContent = user.email;
     let toggleState = document.getElementById("userState");
     if (user.ativo) {
-        toggleState.textContent = "Utilizador activo";
+        toggleState.textContent = "Active user";
     }
     else {
-        toggleState.textContent = "Utilizador inactivo";
+        toggleState.textContent = "Inactive user";
     }
     let startingDate = document.getElementById("userAdesionDate");
-    startingDate.textContent = "Utilizador aderiu na data" + String(Date.now());
+    let dataAdesao = new Date();
+    let mesAdesao = dataAdesao.getMonth() + 1;
+    let diaAdesao = dataAdesao.getDate();
+    let anoAdesao = dataAdesao.getFullYear();
+    startingDate.textContent = "User started on " + String(diaAdesao) + "/" + String(mesAdesao) + "/" + String(anoAdesao);
     modal.classList.add("show");
 }
 function createBtnCloseModal() {
@@ -241,7 +244,6 @@ function loadInitialUsers() {
 function createBtnAz() {
     let btnAz = document.getElementById("orderAZ");
     btnAz.addEventListener("click", () => {
-        // event.stopPropagation(); 
         orderArray();
     });
 }

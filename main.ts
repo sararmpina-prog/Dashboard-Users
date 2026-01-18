@@ -198,7 +198,6 @@ function switchUserState(identificador: number) {
 
   let utilizadorParaDesativar = listaUtilizadorParaDesativar[0]
 
-  //tenho que remover o utilizador do meu array
 
   if (utilizadorParaDesativar.ativo) {
     utilizadorParaDesativar.ativo = false;
@@ -352,14 +351,18 @@ function renderModalUser(identificador: number) {
 
   let toggleState = document.getElementById("userState") as HTMLParagraphElement;
   if (user.ativo) {
-    toggleState.textContent = "Utilizador activo"; 
+    toggleState.textContent = "Active user"; 
   } else {
-    toggleState.textContent = "Utilizador inactivo"; 
+    toggleState.textContent = "Inactive user"; 
   }
   
   
   let startingDate = document.getElementById("userAdesionDate") as HTMLParagraphElement; 
-  startingDate.textContent = "Utilizador aderiu na data" + String(Date.now()); 
+      let dataAdesao = new Date();
+      let mesAdesao = dataAdesao.getMonth() + 1; 
+      let diaAdesao = dataAdesao.getDate(); 
+      let anoAdesao = dataAdesao.getFullYear(); 
+      startingDate.textContent = "User started on " + String(diaAdesao) + "/" + String(mesAdesao) + "/" + String(anoAdesao); 
 
   modal.classList.add("show"); 
   
@@ -421,8 +424,7 @@ function loadInitialUsers() {
 function createBtnAz () {
   let btnAz = document.getElementById("orderAZ") as HTMLButtonElement;
 
-  btnAz.addEventListener("click", () => {
-    // event.stopPropagation(); 
+  btnAz.addEventListener("click", () => { 
     orderArray()
   }); 
 }
