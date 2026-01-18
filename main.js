@@ -10,14 +10,25 @@ var Utilizador = /** @class */ (function () {
     };
     return Utilizador;
 }());
+var filterOrder = false;
+var filterShowActive = false;
+var filterWord = "";
 var listaUtilizadores = [];
+var InitialUsers = [
+    { id: 1, nome: "Beatriz Guerreiro", email: "bialarag@gmail.com" },
+    { id: 2, nome: "Greicelle Silva", email: "greicellesilva@gmail.com" },
+    { id: 3, nome: "Daniel Pina", email: "danielteclado@gmail.com" },
+    { id: 4, nome: "Tomás José", email: "tomecas@gmail.com" },
+    { id: 5, nome: "Ana Luísa", email: "anuxaHspl@gmail.com" },
+    { id: 6, nome: "Ricky", email: "tom&Jerry@gmail.com" },
+];
 getNewUserFormData();
-loadUsers();
-renderUtilizadores(listaUtilizadores);
+loadInitialUsers();
 createBtnShowActiveUsers();
 createBtnSearch();
 createBtnCloseModal();
 createBtnAz();
+createBtnResetFilter();
 function renderUserCard(user) {
     var elementoLista = document.createElement("li");
     elementoLista.setAttribute("class", "userCard");
@@ -42,27 +53,35 @@ function renderUserCard(user) {
     containerUtilizador.appendChild(createBtnSeeMore(user));
     return elementoLista;
 }
-// function renderUser() {
-//   let lista: Utilizador[] = listaUtilizadores; 
-//   if (filterUsers == true) {
-//       lista =listaUtilizadores.filter((utilizador) => utilizador.ativo == true);
-//   } 
-//   let listaDeUtilizadores = document.getElementById("dadosUtilizador" ) as HTMLUListElement;
-//   listaDeUtilizadores.innerHTML = "";
-//   for (let i = 0; i < lista.length; i++) {
-//     listaDeUtilizadores.appendChild(renderUserCard(lista[i]))
-//   }
-//   badgeUtilizadores();
-//   badgeAtivos(); 
-//   usersTotalStats();
-//   activeUsersPercentage() 
-// }
-function renderUtilizadores(lista) {
+function renderUtilizadores() {
+    renderDebugData();
     var listaDeUtilizadores = document.getElementById("dadosUtilizador");
     listaDeUtilizadores.innerHTML = "";
+    var lista = listaUtilizadores;
+    if (filterWord) {
+        var listaUserSearched = [];
+        for (var i = 0; i < listaUtilizadores.length; i++) {
+            var palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(filterWord);
+            if (palavraMagica) {
+                listaUserSearched.push(listaUtilizadores[i]);
+            }
+        }
+        lista = listaUserSearched;
+    }
+    if (filterOrder == true) {
+        var listaCopiada = lista.slice();
+        var userOrdered = listaCopiada.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
+        lista = userOrdered;
+    }
+    if (filterShowActive == true) {
+        var listaUtilizadoresAtivos = lista.filter(function (utilizador) { return utilizador.ativo == true; });
+        lista = listaUtilizadoresAtivos;
+    }
     for (var i = 0; i < lista.length; i++) {
         listaDeUtilizadores.appendChild(renderUserCard(lista[i]));
     }
+    renderFilterBtnOrder();
+    renderFilterBtnActiveUsers();
     renderTotalUsersBadge();
     renderAtiveUsersBadge();
     renderUserCount();
@@ -102,22 +121,24 @@ function createBtnActivateToggle(user) {
     return btnDesativar;
 }
 function switchUserState(identificador) {
-    var utilizadorParaDesativar = (listaUtilizadores.filter(function (utilizador) { return utilizador.id == identificador; }))[0];
+    var listaUtilizadorParaDesativar = listaUtilizadores.filter(function (utilizador) { return utilizador.id == identificador; });
+    var utilizadorParaDesativar = listaUtilizadorParaDesativar[0];
+    //tenho que remover o utilizador do meu array
     if (utilizadorParaDesativar.ativo) {
         utilizadorParaDesativar.ativo = false;
     }
     else {
         utilizadorParaDesativar.ativo = true;
     }
-    renderUtilizadores(listaUtilizadores);
+    renderUtilizadores();
 }
 function createBtnShowActiveUsers() {
     var btnMostrarAtivos = document.getElementById("btnSoAtivos");
     btnMostrarAtivos.addEventListener("click", function () { return renderLoggedInUsers(); });
 }
 function renderLoggedInUsers() {
-    var listaUtilizadoresAtivos = listaUtilizadores.filter(function (utilizador) { return utilizador.ativo == true; });
-    renderUtilizadores(listaUtilizadoresAtivos);
+    filterShowActive = true;
+    renderUtilizadores();
 }
 function getNewUserFormData() {
     var formNewUser = document.getElementById("formNewUser");
@@ -140,7 +161,7 @@ function createNewUser(nomeDoUtilizador, emailDoUtilizador) {
     }
     var novoUtilizador = new Utilizador(id, nome, email);
     listaUtilizadores.push(novoUtilizador);
-    renderUtilizadores(listaUtilizadores);
+    renderUtilizadores();
     return listaAtb;
 }
 function renderAtiveUsersBadge() {
@@ -163,7 +184,7 @@ function renderInactiveUsersBadge() {
 function removeUsers(identificador) {
     var listaSemInativos = listaUtilizadores.filter(function (utilizador) { return utilizador.id != identificador; });
     listaUtilizadores = listaSemInativos;
-    renderUtilizadores(listaUtilizadores);
+    renderUtilizadores();
 }
 function createBtnSearch() {
     var inputPesquisa = document.getElementById("pesquisaUtilizadores");
@@ -171,14 +192,8 @@ function createBtnSearch() {
     inputPesquisa.addEventListener("input", function () { return searchUser(inputPesquisa.value); });
 }
 function searchUser(palavraInserida) {
-    var listaUserSearched = [];
-    for (var i = 0; i < listaUtilizadores.length; i++) {
-        var palavraMagica = (listaUtilizadores[i].nome).toLowerCase().includes(palavraInserida);
-        if (palavraMagica) {
-            listaUserSearched.push(listaUtilizadores[i]);
-        }
-    }
-    renderUtilizadores(listaUserSearched);
+    filterWord = palavraInserida;
+    renderUtilizadores();
 }
 function renderModalUser(identificador) {
     var user = (listaUtilizadores.filter(function (utilizador) { return utilizador.id == identificador; }))[0];
@@ -218,25 +233,61 @@ function renderActiveUsersPercentage() {
     var percentage = (totalAtivos / totalUsers) * 100;
     usersActivePercentage.textContent = "Percentage of active users: " + String(percentage.toFixed(2)) + "%";
 }
-function loadUsers() {
-    // let listaNewUser = 
-    // console.log(listaNewUser); 
-    var biaGuerreiro = new Utilizador(Date.now(), "Beatriz Guerreiro", "bialarag@gmail.com");
-    var greicelleSilva = new Utilizador(Date.now() + 1, "Greicelle Silva", "greicellesilva@gmail.com");
-    var danielPina = new Utilizador(Date.now() + 2, "Daniel Pina", "danielteclado@gmail.com");
-    var tomasJose = new Utilizador(Date.now() + 3, "Tomás José", "tomecas@gmail.com");
-    // let calvinSilva = new Utilizador(Date.now() + 4, "Calvin Almeida", "calvinandhobbes@gmail.com");
-    // let lucasSilva = new Utilizador(Date.now() + 5, "Lucas Madeira", "calvinandlucas@gmail.com");
-    listaUtilizadores.push(biaGuerreiro, greicelleSilva, danielPina, tomasJose);
+function loadInitialUsers() {
+    for (var i = 0; i < InitialUsers.length; i++) {
+        var newUser = new Utilizador(InitialUsers[i].id, InitialUsers[i].nome, InitialUsers[i].email);
+        listaUtilizadores.push(newUser);
+    }
+    renderUtilizadores();
 }
 function createBtnAz() {
     var btnAz = document.getElementById("orderAZ");
-    btnAz.addEventListener("click", function (event) {
-        event.stopPropagation();
+    btnAz.addEventListener("click", function () {
+        // event.stopPropagation(); 
         orderArray();
     });
 }
 function orderArray() {
-    var userOrdered = listaUtilizadores.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
-    renderUtilizadores(userOrdered);
+    filterOrder = true;
+    renderUtilizadores();
+}
+function createBtnResetFilter() {
+    var btnResetFilters = document.getElementById("btnResetAllFilters");
+    btnResetFilters.addEventListener("click", function () { return resetAllFilters(); });
+}
+function resetAllFilters() {
+    filterOrder = false;
+    alert(filterOrder);
+    filterShowActive = false;
+    filterWord = "";
+    renderUtilizadores();
+}
+function renderFilterBtnActiveUsers() {
+    var btnMostrarAtivos = document.getElementById("btnSoAtivos");
+    if (filterShowActive == true) {
+        btnMostrarAtivos.classList.add("filterActive");
+    }
+    else {
+        btnMostrarAtivos.classList.remove("filterActive");
+    }
+}
+function renderFilterBtnOrder() {
+    var btnAz = document.getElementById("orderAZ");
+    if (filterOrder == true) {
+        btnAz.classList.add("filterActive");
+    }
+    else {
+        btnAz.classList.remove("filterActive");
+    }
+}
+function renderDebugData() {
+    var debugDiv = document.querySelector("#debug");
+    var divTasks = document.createElement("div");
+    debugDiv.innerHTML = "";
+    for (var i = 0; i < listaUtilizadores.length; i++) {
+        var line = document.createElement("div");
+        line.textContent = JSON.stringify(listaUtilizadores[i]);
+        debugDiv.appendChild(line);
+    }
+    debugDiv.appendChild(divTasks);
 }
