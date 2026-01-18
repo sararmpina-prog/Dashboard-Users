@@ -257,7 +257,6 @@ function createBtnResetFilter() {
 }
 function resetAllFilters() {
     filterOrder = false;
-    alert(filterOrder);
     filterShowActive = false;
     filterWord = "";
     renderUtilizadores();
