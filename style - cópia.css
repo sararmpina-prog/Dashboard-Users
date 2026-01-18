@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 0; 
+  padding: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.utilities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; 
+  width: 100%;
+}
+
+label span {
+  color: #e11d48;
+}
+
+.butones {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  margin-left: 5px;
+}
+
+li {
+ list-style: none;
+}
+
+.activo {
+  color: green; 
+}
+
+.desativo {
+  color: red; 
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: black; 
+  background-color: lightblue;
+  border-radius: 999px; /* pill */
+  vertical-align: middle;
+}
+
+.grid {
+  display: grid;
+  width: 100%;
+}
+
+.badgeInativos {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #e11d48; /* vermelho */
+  border-radius: 999px; /* pill */
+  vertical-align: middle;
+}
+
+.badgeAtivos {
+   display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: green; 
+  border-radius: 999px; /* pill */
+  vertical-align: middle;
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-content {
+  background-color: whitesmoke; 
+  border-radius: 10px;
+  padding: 2rem;
+  width: clamp(300px, 60%, 600px); /* clamp para o 'width' responsivo */
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+  color: black; 
+}
+
+.botao {
+    border: 1px solid black;
+    background-color: whitesmoke;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.userCard {
+  background: whitesmoke; 
+  border-radius: 12px;
+  padding: 16px;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.userTemplate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+
+button {
+  border-radius: 5px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
