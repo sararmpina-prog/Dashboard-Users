@@ -19,14 +19,17 @@
     padding-bottom: 24px;
   }
   
-  header {
+  header a {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: center; 
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.4rem;
   }
   
-  h1 {
-    margin: 50px;
+  h1 #titlePrincipal {
+    margin: 200px;
     font-size: 1.4rem;
     font-weight: 600;
     display: flex;
@@ -84,7 +87,7 @@
     color: white;
   }
   
-  /* percentagem */
+
   #estatistica {
     display: flex;
     justify-content: center;
@@ -250,7 +253,7 @@
     font-weight: 600;
   }
   
-  /* botões no card (teal) */
+
   .userCard button {
     padding: 6px 8px;
     border-radius: 6px;
@@ -264,7 +267,7 @@
     margin-left: 6px;
   }
   
-  /* ===== Modal ===== */
+
   .modal {
     opacity: 0;
     visibility: hidden;
@@ -328,7 +331,7 @@
     right: 12px;
   }
   
-  /* ===== Footer debug (discreto) ===== */
+ 
   footer {
     width: min(1100px, calc(100% - 48px));
     border-radius: 12px;
