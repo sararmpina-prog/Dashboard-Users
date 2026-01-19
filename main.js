@@ -158,7 +158,7 @@ function createNewUser(nomeDoUtilizador, emailDoUtilizador) {
     for (let i = 0; i <= 5; i++) {
         id = id + 1;
     }
-    if (email.includes("@")) {
+    if (validateEmail(email)) {
         let novoUtilizador = new Utilizador(id, nome, email);
         listaUtilizadores.push(novoUtilizador);
         span.textContent = "*";
@@ -168,6 +168,10 @@ function createNewUser(nomeDoUtilizador, emailDoUtilizador) {
     }
     renderUtilizadores();
     return listaAtb;
+}
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
 }
 function renderAtiveUsersBadge() {
     let contadorAtivos = document.getElementById("utilizadoresAtivos");

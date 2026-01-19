@@ -265,7 +265,7 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
   } 
 
   
-  if (email.includes("@")) {
+  if (validateEmail(email)) {
       let novoUtilizador = new Utilizador(id, nome, email);
       listaUtilizadores.push(novoUtilizador);
       span.textContent = "*"; 
@@ -278,6 +278,14 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
   return listaAtb; 
 }
 
+
+function validateEmail(email: string) {
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+
+return emailPattern.test(email);
+
+}
 
 function renderAtiveUsersBadge () {
   let contadorAtivos = document.getElementById("utilizadoresAtivos") as HTMLSpanElement; 
