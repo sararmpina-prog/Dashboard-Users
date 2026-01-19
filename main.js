@@ -12,6 +12,7 @@ class Utilizador {
 let filterOrder = false;
 let filterShowActive = false;
 let filterWord = "";
+let inputPesquisa = document.getElementById("pesquisaUtilizadores");
 let listaUtilizadores = [];
 let InitialUsers = [
     { id: 1, nome: "Beatriz Guerreiro", email: "bialarag@gmail.com" },
@@ -196,7 +197,6 @@ function removeUsers(identificador) {
     renderUtilizadores();
 }
 function createBtnSearch() {
-    let inputPesquisa = document.getElementById("pesquisaUtilizadores");
     let btnPesquisa = document.getElementById("pesquisar");
     inputPesquisa.addEventListener("input", () => searchUser(inputPesquisa.value));
 }
@@ -270,6 +270,7 @@ function resetAllFilters() {
     filterOrder = false;
     filterShowActive = false;
     filterWord = "";
+    inputPesquisa.value = "";
     renderUtilizadores();
 }
 function renderFilterBtnActiveUsers() {

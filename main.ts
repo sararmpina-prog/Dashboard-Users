@@ -29,6 +29,8 @@ let filterOrder: boolean = false;
 let filterShowActive: boolean = false; 
 let filterWord: string = ""; 
 
+let inputPesquisa = document.getElementById("pesquisaUtilizadores") as HTMLInputElement;
+
 
 let listaUtilizadores: Utilizador[] = [];
 
@@ -336,8 +338,7 @@ function removeUsers (identificador: number) {
 
 
 function createBtnSearch() {
-  let inputPesquisa = document.getElementById("pesquisaUtilizadores") as HTMLInputElement;
-
+  
   let btnPesquisa = document.getElementById("pesquisar") as HTMLButtonElement;
 
   inputPesquisa.addEventListener("input", () => searchUser(inputPesquisa.value))
@@ -350,6 +351,7 @@ function searchUser (palavraInserida: string) {
   filterWord = palavraInserida; 
 
   renderUtilizadores(); 
+
 }
 
 
@@ -467,7 +469,10 @@ function createBtnResetFilter() {
 
     filterWord= ""; 
 
+    inputPesquisa.value = ""; 
+
     renderUtilizadores(); 
+
   }
 
 function renderFilterBtnActiveUsers () {

@@ -6,7 +6,7 @@
   }
   
   body {
-    min-height: 100vh;
+    max-height: 100vh;
     font-family: Arial, sans-serif;
     background: whitesmoke;
     line-height: 1.2;
@@ -21,6 +21,7 @@
   
   header a {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center; 
     text-decoration: none;
