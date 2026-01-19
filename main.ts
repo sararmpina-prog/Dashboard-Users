@@ -253,6 +253,8 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
   let nome: string = nomeDoUtilizador.value;
   let email: string = emailDoUtilizador.value;
 
+  let span = document.getElementById("spanMsgInfo") as HTMLSpanElement; 
+
   let listaAtb: string [] = [];
   listaAtb.push(nome, email); 
 
@@ -261,10 +263,16 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
   for (let i = 0; i<=5; i++) {
     id = id + 1; 
   } 
-  let novoUtilizador = new Utilizador(id, nome, email);
 
-  listaUtilizadores.push(novoUtilizador);
-
+  
+  if (email.includes("@") && email.includes(".")) {
+     let novoUtilizador = new Utilizador(id, nome, email);
+      listaUtilizadores.push(novoUtilizador);
+      span.textContent = "*"; 
+  } else {
+    span.textContent = '* Confirme o uso dos seguintes caracteres "@" e "."'; 
+  }
+ 
   renderUtilizadores();
 
   return listaAtb; 
