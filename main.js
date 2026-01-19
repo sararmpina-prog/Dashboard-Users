@@ -158,7 +158,7 @@ function createNewUser(nomeDoUtilizador, emailDoUtilizador) {
     for (let i = 0; i <= 5; i++) {
         id = id + 1;
     }
-    if (email.includes("@") && email.includes(".")) {
+    if (email.includes("@")) {
         let novoUtilizador = new Utilizador(id, nome, email);
         listaUtilizadores.push(novoUtilizador);
         span.textContent = "*";

@@ -72,18 +72,18 @@
   
  
   .badge {
-    background-color: #ef4444;
+    background-color: grey; 
     color: white;
   }
   
 
   .badgeAtivos {
-    background-color: #16a34a;
+    background-color: grey; 
     color: white;
   }
   
   .badgeInativos {
-    background-color: #e11d48;
+    background-color: grey; 
     color: white;
   }
   
@@ -152,7 +152,7 @@
     grid-row: 3;
   
     height: 38px;
-    background-color: tomato;
+    background-color: grey; 
     color: white;
     border: none;
     padding: 0 14px;

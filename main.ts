@@ -265,11 +265,11 @@ function createNewUser(nomeDoUtilizador: HTMLInputElement, emailDoUtilizador: HT
   } 
 
   
-  if (email.includes("@") && email.includes(".")) {
-     let novoUtilizador = new Utilizador(id, nome, email);
+  if (email.includes("@")) {
+      let novoUtilizador = new Utilizador(id, nome, email);
       listaUtilizadores.push(novoUtilizador);
       span.textContent = "*"; 
-  } else {
+    } else {
     span.textContent = '* Confirme o uso dos seguintes caracteres "@" e "."'; 
   }
  
